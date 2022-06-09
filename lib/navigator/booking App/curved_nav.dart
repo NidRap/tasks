@@ -1,0 +1,42 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_application_2/navigator/booking%20App/cab.dart';
+import 'package:flutter_application_2/navigator/booking%20App/flight.dart';
+import 'package:flutter_application_2/navigator/booking%20App/hotel.dart';
+
+class BookingsBottomNavApp extends StatefulWidget {
+  const BookingsBottomNavApp({Key? key}) : super(key: key);
+  @override
+  State<BookingsBottomNavApp> createState() => _BookingsBottomNavAppState();
+}
+
+class _BookingsBottomNavAppState extends State<BookingsBottomNavApp> {
+  static int _currentIndex = 0;
+  final tabWidgets = [
+    const HotelWidget(),
+    const FlightWidget(),
+    const CabWidget()
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Bookings App'),
+      ),
+      body: tabWidgets[_currentIndex],
+      bottomNavigationBar: CurvedNavigationBar(
+        backgroundColor: Colors.blueAccent,
+        items: const [
+          Icon(Icons.hotel, size: 24.0),
+          Icon(Icons.flight, size: 24.0),
+          Icon(Icons.directions_car, size: 24.9)
+        ],
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+      ),
+    );
+  }
+}
